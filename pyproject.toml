@@ -3,11 +3,11 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "csv-cleaner"
+name = "clean-csv-tool"
 version = "1.0.0"
 description = "A utility for cleaning and normalizing CSV files"
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
 authors = [
     {name = "Shawna Staff"}
 ]
@@ -15,7 +15,6 @@ keywords = ["csv", "data-cleaning", "etl", "data-processing"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
