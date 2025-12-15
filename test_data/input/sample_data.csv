@@ -1,0 +1,8 @@
+Name;Email;City;Notes;
+"John Doe";john@example.com;"New York";N'Customer since 2020';
+N'Jane Smith';jane@example.com;  Los Angeles  ;Regular buyer;
+"Bob's Store";bob@store.com;"Chicago";It's a wholesale account;
+"María García";maria@ejemplo.com;"São Paulo";International client;
+  Alice Johnson  ;"alice@test.com";"Seattle";"VIP member";;
+N'Test User';test@test.com;N'San Francisco';Multiline test;
+"quoted";normal;  spaced  ;trailing semicolon;;

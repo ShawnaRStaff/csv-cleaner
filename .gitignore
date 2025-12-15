@@ -1,2 +1,12 @@
-# Ignore Python virtual environments
+# Python virtual environments
 venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Pytest cache
+.pytest_cache/
+
+# Test output
+test_data/output/

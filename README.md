@@ -1,65 +1,79 @@
-﻿# csv-cleaner 🧹📊
+# csv-cleaner
 
-## Description
+A Python utility for cleaning and normalizing CSV files. Designed for preparing messy raw data (especially OutSystems exports) for analysis or database imports.
 
-A Python application designed to clean, normalize, and format CSV files. Perfect for preparing messy 
-raw data for analysis or database imports! ✨ This tool removes unnecessary characters, handles 
-formatting issues, and ensures clean and structured output.
+## Features
 
+- Removes OutSystems N' prefix patterns
+- Strips stray quotes and trailing semicolons
+- Handles malformed rows with trailing delimiters
+- Pads incomplete rows to maintain column alignment
+- Supports batch processing of multiple CSV files
+- Configurable input/output delimiters
 
-## Features  🚀
+## Installation
 
-- 🧽 Cleans cells by removing unnecessary characters like stray quotes and semicolons.
-- 🛠️ Handles malformed rows, ensuring proper alignment across columns.
-- 📁 Supports batch processing of multiple CSV files in a folder.
-- ✅ Keeps the original delimiter consistent (e.g., semicolon ;).
-- ⚡ Lightweight and easy to use with minimal dependencies.
+```bash
+git clone https://github.com/ShawnaRStaff/csv-cleaner.git
+cd csv-cleaner
+python -m venv venv
+source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+pip install -r requirements.txt
+```
 
+## Usage
 
-## Installation 🖥️
+```bash
+# Basic usage
+python clean_csvs.py -i ./input_folder -o ./output_folder
 
-1. Clone the repository:
-    - `git clone https://github.com/ShawnaRStaff/csv-cleaner.git`
-    - cd csv-cleaner
-2. Create and activate a virtual environment:
-    - python -m venv venv
-    - `source venv/bin/activate`  # On Windows: `.\venv\Scripts\activate`
+# With custom delimiters
+python clean_csvs.py -i ./input -o ./output --input-delimiter ";" --output-delimiter ","
 
+# Verbose output
+python clean_csvs.py -i ./input -o ./output -v
 
-## Usage 🛠️
+# Quiet mode (errors only)
+python clean_csvs.py -i ./input -o ./output -q
+```
 
-1. Place your input CSV files in the specified input folder.
-2. Run the script:
-    - `python clean_csv.py`
-3. Cleaned CSV files will be saved to the output folder.
+### Options
 
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-i`, `--input` | Input folder containing CSV files | Required |
+| `-o`, `--output` | Output folder for cleaned files | Required |
+| `--input-delimiter` | Delimiter in input files | `;` |
+| `--output-delimiter` | Delimiter in output files | `,` |
+| `-e`, `--encoding` | File encoding | `utf-8` |
+| `-v`, `--verbose` | Enable verbose output | Off |
+| `-q`, `--quiet` | Suppress all output except errors | Off |
 
-## Configuration ⚙️
+## Example
 
-Update the input_folder and output_folder variables in clean_csv.py to specify the paths for your files:
-- `input_folder = "C:/path/to/input_folder"`
-- `output_folder = "C:/path/to/output_folder"`
-
-
-## How It Works 🔍
-
-1. Input Parsing: Reads each CSV file from the input folder.
-2. Cleaning Logic: Applies transformations like:
-    - 🗑️ Removing stray quotes and semicolons.
-    - ✂️ Trimming whitespace and handling malformed rows.
-3. Output: Writes cleaned data to the output folder, maintaining the original structure.
-
-
-### Example 📋
-
-**Input**:
+**Input** (`data.csv`):
+```
 "Name";"Age";"City";
 "John";30;"New York";
-"Jane";; "Los Angeles";
-"Mike";25;"Chicago";
+N'Jane';25;  Los Angeles  ;
+"Bob's Store";40;"Chicago";;
+```
 
-**Output**
-Name;Age;City
-John;30;New York
-Jane;;Los Angeles
-Mike;25;Chicago
+**Output** (`data.csv`):
+```
+Name,Age,City
+John,30,New York
+Jane,25,Los Angeles
+Bobs Store,40,Chicago
+```
+
+## Running Tests
+
+```bash
+pip install pytest
+pytest tests/ -v
+```
+
+## License
+
+MIT
